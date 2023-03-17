@@ -62,7 +62,7 @@ with open(filename) as csv_file:
 # 60 * 8
 current_start_time = None
 
-for i in range(0, 60 * 8 + 1):
+for i in range(0, 60 * 8):
     hour = 9 + (i // 60)
     minute = i % 60
 
@@ -75,8 +75,7 @@ for i in range(0, 60 * 8 + 1):
     # print(str(hour) + ':' + minute)
 
     for client in clients_available:
-        if clients_available[client][1] is True and str(hour) + ':' + minute in \
-                clients_available[client][0].start_times:
+        if str(hour) + ':' + minute in clients_available[client][0].start_times:
             # print('hi')
             all_available = False
             clients_available[client] = (clients_available[client][0], False)
