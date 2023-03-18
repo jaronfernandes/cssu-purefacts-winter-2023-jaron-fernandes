@@ -71,9 +71,13 @@ for i in range(0, 60 * 8):
         minute = str(minute)
 
     all_available = True
-    print(str(hour) + ':' + minute)
+    # print(str(hour) + ':' + minute)
 
     for client in clients_available:
+        # print(client)
+        # print(clients_available[client][0].start_times)
+        # print(clients_available[client][0].end_times)
+        # print(all_available)
         if str(hour) + ':' + minute in clients_available[client][0].start_times:
             # print('hi')
             all_available = False
@@ -81,22 +85,24 @@ for i in range(0, 60 * 8):
 
             if current_start_time is not None:
                 current_start_time = None
-            break
 
-        elif clients_available[client][1] is False and str(hour) + ':' + minute not in \
+        if clients_available[client][1] is False and str(hour) + ':' + minute not in \
                 clients_available[client][0].end_times:
-            # print('hi')
+            # print('hi2')
             all_available = False
 
             if current_start_time is not None:
                 current_start_time = None
-            break
-        elif clients_available[client][1] is False and str(hour) + ':' + minute in \
-                clients_available[client][0].end_times:
+
+        if clients_available[client][1] is False and str(hour) + ':' + minute in \
+                clients_available[client][0].end_times and str(hour) + ':' + minute not in \
+                clients_available[client][0].start_times:
+            # print('hi3')
             clients_available[client] = (clients_available[client][0], True)
 
             continue
-        else:
+        elif all_available:
+            # print('hi4')
             continue
             # clients_available[client][1] == True and str(hour) + ':' + minute in
             # clients_available[client][0].start_times:
