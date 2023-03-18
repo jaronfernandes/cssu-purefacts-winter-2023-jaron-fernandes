@@ -51,10 +51,9 @@ with open(filename) as csv_file:
 
     for row in reader:
         if 'Client' in row[0]:
-            if current_client is None:
-                current_client = Client()
-                clients.add(current_client)
-                clients_available[row[0]] = (current_client, True)
+            current_client = Client()
+            clients.add(current_client)
+            clients_available[row[0]] = (current_client, True)
 
         current_client.add_occupied_time(row[1], row[2])
 
@@ -72,7 +71,7 @@ for i in range(0, 60 * 8):
         minute = str(minute)
 
     all_available = True
-    # print(str(hour) + ':' + minute)
+    print(str(hour) + ':' + minute)
 
     for client in clients_available:
         if str(hour) + ':' + minute in clients_available[client][0].start_times:
